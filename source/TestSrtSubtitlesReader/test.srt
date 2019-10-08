@@ -1,0 +1,11 @@
+﻿1
+beginTime --> endTime
+Pierwsza linia
+
+2
+beginTime --> endTime
+Druga linia
+
+3
+beginTime --> endTime
+Trzecia linia

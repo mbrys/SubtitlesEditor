@@ -1,0 +1,11 @@
+SubtitlesEditor:
+- obs³uga wyj¹tków
+- refaktoryzacja kodu w MainForm
+
+MvcCollectors
+- zaprojektowaæ g³ówn¹ funkcjonalnoœæ witryny
+- logiczny podzia³ na kontrolery
+
+
+WebForms Website
+- zaplanowaæ witrynê, o czym bêdzie, jak ma wygl¹daæ

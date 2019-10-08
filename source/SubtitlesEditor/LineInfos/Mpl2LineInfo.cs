@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using SubtitlesEditor.LineInfos;
+
+namespace SubtitlesEditor.LineInfos
+{
+    public class Mpl2LineInfo : ILineInfo
+    {
+        private string line;
+        private string begin;
+        private int lineNumber;
+        private string end;
+
+        public string Line
+        {
+            get { return line; }
+            set { line = value; }
+        }
+        public string Begin
+        {
+            get { return begin; }
+            set { begin = value; }
+        }
+        public string End
+        {
+            get { return end; }
+            set { end = value; }
+        }
+
+        public int LineNumber
+        {
+            get { return lineNumber; }
+            set { lineNumber = value; }
+        }
+        public override string ToString()
+        {
+            return lineNumber + ": " + line;
+        }
+        //public override string ToString()
+        //{
+        //    return lineNumber + " || [" + begin + "][" + end + "] || " + linfo;
+        //}
+        public override bool Equals(object o)
+        {
+            var other = o as Mpl2LineInfo;
+            if (other == null) { return false; }
+            return this.line == other.line
+              && this.lineNumber == other.lineNumber
+              && this.end == other.end
+              && this.begin == other.begin;
+        }
+
+        public override int GetHashCode() { return 1; }
+
+
+        public string TimeInfo
+        {
+            get { return "[" + begin + "][" + end + "]"; }
+        }
+
+
+        public string SecondsToTime(double seconds)
+        {
+            var deciseconds = Math.Floor(seconds * 10);
+            return deciseconds.ToString();
+        }
+
+
+        public double TimeToSeconds(string time)
+        {
+            time = time.Trim(new char[] { '[', ']' });
+            double seconds = Double.Parse(time);
+            seconds /= 10;
+            return seconds;
+        }
+
+
+        public string MoveTime(string oldTime, double secs)
+        {
+            double newBegin = TimeToSeconds(oldTime) + secs;
+            if (newBegin < 0)
+                throw new ArgumentException("Too much time to subtract");
+            return SecondsToTime(newBegin);
+        }
+    }
+}
